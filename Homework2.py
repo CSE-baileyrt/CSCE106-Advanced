@@ -1,32 +1,50 @@
-# NOTE: Homework 1 was a quiz that you completed the first week of class, in Blackboard
+# The purpose of this assignment is to demonstrate mastery of creating and calling functions
 
-# Your assignment is to create a random password generator
-# This assignment makes use of: random, lists, strings, loops, nested loops
+# In Lecture 4, we wrote a very simple calculator together. You will expand that calculator.
+# Instructions:
+# 1. Allow the user to enter decimal numbers (not just integers)
+# 2. Create more functions to perform math operations
+#       This program will be able to perform 8 total functions
+#       NOTE: Some math functions do not allow decimal numbers. If that is the case, print a warning to the user
+#           that their input (entered as a decimal) has been altered. No suprises! 
+# 3. Alter the "calculate" function to pass the function call through to the math operation
+# 4. Alter the user interaction section to allow the user to perform as many calculations as they wish
+#       Any looping structure is acceptable
+#       Also display the 4 new calculation options
 
-# Start with a list of letters (upper and lower), a list of numbers, and a list of symbols. For example: 
-lowers = ['a', 'b', 'c'] # (TODO: fill in the rest of the lowercase letters)
-uppers = ['A', 'B', 'C'] # etc.
-nums = ['0', '1', '2'] # etc. (only single digits are necessary)
-specials = ['*', '&', '%'] # etc.
-# TODO: If you choose to leave out any letters or numbers, include an explanation in comments
-#   It might be good to leave a comment about which symbols you choose to include or exclude
+# imports section
+import math
 
-# TODO: Ask the user how many characters long to make the password
-# Start with an empty password string
-# TODO: Repeat the following steps as many times as needed until the password is long enough
-#   1. Randomly select a character from one of the lists above
-#   2. Add that random character to the password string
+# functions section
+# TODO 2: add 4 more functions of your design
+# TODO 2: convert to int numbers if needed (if the function cannot handle decimals)
+def add_nums(a, b):
+    return a + b
+def sub_nums(a, b):
+    return a - b
+def mul_nums(a, b):
+    return a * b
+def div_nums(a, b):
+    return a / b
 
-# Print "Here are 3 random passwords of that length. Choose any that you like."
-# TODO: Print the password generated above (matching the requested length)
-# Generate a second password and print it
-# Generate a third password and print it
-# NOTE: It might be helpful to put the code to generate one password into a function
+def calculate(a, b, oper):
+    if oper=='a':
+        print("the sum is {}".format(add_nums(a, b)))
+    elif oper=='s':
+        print("the difference is {}".format(sub_nums(a, b)))
+    elif oper=='m':
+        print("the product is {}".format(mul_nums(a, b)))
+    elif oper=='d':
+        print("the quotient is {}".format(div_nums(a, b)))
+    # TODO 3: add more calculate handlers
+    else:
+        print("invalid operation")
 
-# TODO: Ask the user if they want to generate another or quit
-#   If they want another, loop all the way back up to asking them how many characters
-#   (They might want one longer or shorter the next time around)
-
-# You’ll use the "random" library so be sure to look over what it can do on the Python docs:
-# https://docs.python.org/3/library/random.html
-# NOTE: There are many ways to "randomly select a character".
+# user interactions section
+# TODO 4: add a loop
+# TODO 1: allow decimal inputs
+u_a = int(input("Enter a number: "))
+u_b = int(input("Enter a second number: "))
+# TODO 4: alter the menu
+u_oper = input("Select an operation: a) add, s) subtract, m) multiply, d) divide: ")
+calculate(u_a, u_b, u_oper)

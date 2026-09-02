@@ -1,50 +1,81 @@
-# The purpose of this assignment is to demonstrate mastery of creating and calling functions
+# The purpose of this assignment is to demonstrate mastery of dictionaries, requests, and adaptation
 
-# In Lecture 4, we wrote a very simple calculator together. You will expand that calculator.
-# Instructions:
-# 1. Allow the user to enter decimal numbers (not just integers)
-# 2. Create more functions to perform math operations
-#       This program will be able to perform 8 total functions
-#       NOTE: Some math functions do not allow decimal numbers. If that is the case, print a warning to the user
-#           that their input (entered as a decimal) has been altered. No suprises! 
-# 3. Alter the "calculate" function to pass the function call through to the math operation
-# 4. Alter the user interaction section to allow the user to perform as many calculations as they wish
-#       Any looping structure is acceptable
-#       Also display the 4 new calculation options
+# In lesson 11, we wrote this code. During that lesson, I made the comment marked with the To-Do
+##### BEGIN STARTER #####
+import requests
+response = requests.get(
+    'https://raw.githubusercontent.com/krishnakt031990/Crawl-Wiki-For-Acronyms/master/AcronymsFile.csv'
+)
+text_lines = response.text.split("\n")
+acronyms = {}
 
-# imports section
-import math
+for line in text_lines:
+    one_line = line.split("- ")
+    if len(one_line) > 1:
+        acro = one_line[0].strip()
+        meaning = one_line[1].strip()
+        acronyms[acro] = meaning
+        
+# full dictionary
+# print(acronyms)
+# print(len(acronyms))
 
-# functions section
-# TODO 2: add 4 more functions of your design
-# TODO 2: convert to int numbers if needed (if the function cannot handle decimals)
-def add_nums(a, b):
-    return a + b
-def sub_nums(a, b):
-    return a - b
-def mul_nums(a, b):
-    return a * b
-def div_nums(a, b):
-    return a / b
+# TODO: "These last 3 lines would make a nice lookup app"
+# print("Hi there! I can look up acronyms for you!")
+# u_acro = input('Enter an acronym: ')
+# print("{} is short for {}".format(u_acro, acronyms[u_acro]))
+##### END STARTER #####
 
-def calculate(a, b, oper):
-    if oper=='a':
-        print("the sum is {}".format(add_nums(a, b)))
-    elif oper=='s':
-        print("the difference is {}".format(sub_nums(a, b)))
-    elif oper=='m':
-        print("the product is {}".format(mul_nums(a, b)))
-    elif oper=='d':
-        print("the quotient is {}".format(div_nums(a, b)))
-    # TODO 3: add more calculate handlers
-    else:
-        print("invalid operation")
 
-# user interactions section
-# TODO 4: add a loop
-# TODO 1: allow decimal inputs
-u_a = int(input("Enter a number: "))
-u_b = int(input("Enter a second number: "))
-# TODO 4: alter the menu
-u_oper = input("Select an operation: a) add, s) subtract, m) multiply, d) divide: ")
-calculate(u_a, u_b, u_oper)
+# Your assignment is to start with that idea (an acronym lookup app) and make it better.
+# TODO: Alter the code to make use of a different content file.
+# https://raw.githubusercontent.com/priscian/nlp/master/OpenNLP/models/coref/acronyms.txt
+# TODO: As usual, allow the user to look up multiple acronyms (keep offering until they choose to quit).
+
+# == Similar elements ==
+# 1. The user interaction is the same: Allow the user to enter an acronym, look it up in the dictionary, 
+#   and display the corresponding meaning.
+# 2. The procedure is also the same: Using the "requests" module, get the content at the URL, receive it 
+#   as a string (response.text), parse the string into a dictionary one line at a time, and then move 
+#   into the user interaction section.
+
+# == Dissimilar elements ==
+# 1. The data is formatted differently, details below
+# 2. The user may search for an acronym that is NOT found in the dictionary, details below
+
+# Data format
+# The data from the in-class example was already condensed for us. Each acronym was only listed once, 
+#   and the various meanings were all listed with that one entry. This time, each possible meaning has 
+#   its own line in the file. You’ll first need to CHECK THE DICTIONARY (hint below) to see if that key 
+#   already exists, and then add/append the second/third/Nth entry onto the end of the value. But a 
+#   dictionary in Python may not have multiple entries with the same key. Example:
+# AA	Administrative Assistant
+# AA	Administrative Authority
+# AA	Affirmative Action committee
+# AA	Alcoholics Anonymous
+# AA	American Airlines
+# AA	Antiaircraft Artillery
+# AA	Associate in Accounting
+# AA	Astronomy and Astrophysics
+# AA	Auto Answer
+# AA	Automobile Association
+# All of those lines need to end up in one dictionary entry. The Key should be "AA" and the Value should
+#   be "Administrative Assistant, Administrative Authority, Affirmative..."
+
+# There are some entries for which there are duplicate (identical) meanings. That’s okay- just add the 
+#   meaning twice (pretend they are different in some subtle way)
+# Example:
+# A.I.	artificial intelligence
+# A.I.	artificial intelligence
+# Key = "A.I." (including the periods), Value = "artificial intelligence, artificial intelligence"
+
+# Missing entries
+# If the user searches for an acronym that is not found, you should display something helpful like 
+#   "Acronym {} was not found in the list".
+# Hint: 
+#     if [key variable name] in [dictionary variable name]:
+#         # code for what to do if it’s found
+#     else:
+#         # code for what to do if it’s NOT found
+# (Optional) You might allow the user to ADD that acronym to the dictionary, if they provide a value
+#   for the meaning.
