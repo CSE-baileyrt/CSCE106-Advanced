@@ -4,6 +4,8 @@
 #       Many websites (StackOverflow included) block bots. We have been able to complete this lab for several years.
 #       However, if SO blocks our traffic more aggressively, I will assign a different objective (website).
 #       Email me if you run into trouble with the SO site.
+#       UPDATE Fall 2026: use GitHub instead (SO blocks bots aggressively now)
+#       It is possible to use StackOverflow's API, but GitHub is simpler
 
 # Instructions: complete the tasks below (marked To-Do)
 # Use the BeautifulSoup library (version 4): https://www.crummy.com/software/BeautifulSoup/
@@ -14,11 +16,10 @@ import requests
 from bs4 import BeautifulSoup
 
 # TODO: download the page using requests:
-#       StackOverflow website, top 45 unanswered questions that are tagged as Python
-#       Alternatively, you can find the top 45 most recent Python questions (instead of unanswered)
+#       GitHub website, top 45 repositories that are tagged as Python
 
-# TODO: using BeautifulSoup, extract the following from the list of questions: title, user, text excerpt
+# TODO: using BeautifulSoup, extract the following from the list of repos: user, repo, stars, desc
 
-# NOTE: you might need to get page 2 and page 3, to get to 45 (do lots of testing)
+# NOTE: you might need to get page 2 and page 3, to get to 45 (use the "?page=" query string parameter)
 
-# TODO: print all 45 questions in the format "{title} ({user}):\n{excerpt}"
+# TODO: print all 45 repos in the format "{user} / {repository} ({stars}):\n{description}"
